@@ -16,5 +16,19 @@
     <string name="trk_name">Name</string>
     <string name="trk_date">Datum</string>
     <string name="trk_length">Länge</string>
+
+    <string-array name="color_select_keys">
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>orange</item>
+    </string-array>
+
+    <string-array name="color_select_values">
+        <item>17170455</item>
+        <item>17170453</item>
+        <item>17170451</item>
+        <item>17170457</item>
+    </string-array>
     
 </resources>

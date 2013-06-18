@@ -5,11 +5,17 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="Map laden" />
-
     <ListPreference
         android:key="track_list"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="Track laden" />
-    
+    <ListPreference
+        android:key="track_color"
+        android:entries="@array/color_select_keys"
+        android:entryValues="@array/color_select_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="Track Farbe" />
+
 </PreferenceScreen>

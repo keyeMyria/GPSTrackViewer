@@ -32,7 +32,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -74,6 +73,7 @@ public class GpsTrackViewerActivity extends MapActivity {
 				ScrollView sv = new ScrollView(v.getContext());
 				LinearLayout ll = new LinearLayout(v.getContext());
 				ll.setOrientation(LinearLayout.VERTICAL);
+				ll.setPadding(10, 10, 10, 10);
 				sv.addView(ll);
 				dialog.setContentView(sv);
 				for (TrackMetadata track : trackList) {
@@ -90,13 +90,15 @@ public class GpsTrackViewerActivity extends MapActivity {
 			}
 
 			private void addElem(LinearLayout ll, final String key, final String value) {
-				TextView tvName = new TextView(ll.getContext());
-				tvName.setText(key);
-				ll.addView(tvName);
+				TextView tvKey = new TextView(ll.getContext());
+				tvKey.setText(key);
+				tvKey.setTextAppearance(ll.getContext(), android.R.style.TextAppearance_Small);
+				ll.addView(tvKey);
 
-				EditText etName = new EditText(ll.getContext());
-				etName.setText(value);
-				ll.addView(etName);
+				TextView tvValue = new TextView(ll.getContext());
+				tvValue.setText(value);
+				tvValue.setTextAppearance(ll.getContext(), android.R.style.TextAppearance_Medium);
+				ll.addView(tvValue);
 			}
 		});
 	}
@@ -146,7 +148,10 @@ public class GpsTrackViewerActivity extends MapActivity {
 	private void loadContent() {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		loadMap(prefs.getString(PreferenceKeys.MAP.getKey(), ""));
-		loadTrack(prefs.getString(PreferenceKeys.TRACK.getKey(), ""));
+		loadTrack(
+				prefs.getString(PreferenceKeys.TRACK.getKey(), ""),
+				Integer.valueOf(prefs.getString(PreferenceKeys.TRACK_COLOR.getKey(),
+						String.valueOf(android.R.color.holo_green_dark))));
 	}
 
 	/**
@@ -168,10 +173,10 @@ public class GpsTrackViewerActivity extends MapActivity {
 	 * Loads the tracks which from the file which filename is defined in the
 	 * preferences and given as parameter. The tracks are displayed as overlay.
 	 */
-	private void loadTrack(final String gpxFileName) {
+	private void loadTrack(final String gpxFileName, final Integer color) {
 		Paint wayDefaultPaintFill = new Paint(Paint.ANTI_ALIAS_FLAG);
 		wayDefaultPaintFill.setStyle(Paint.Style.STROKE);
-		wayDefaultPaintFill.setColor(getResources().getColor(android.R.color.holo_blue_dark));
+		wayDefaultPaintFill.setColor(getResources().getColor(color));
 		wayDefaultPaintFill.setAlpha(160);
 		wayDefaultPaintFill.setStrokeWidth(7);
 		wayDefaultPaintFill.setStrokeJoin(Paint.Join.ROUND);
@@ -179,7 +184,7 @@ public class GpsTrackViewerActivity extends MapActivity {
 
 		Paint wayDefaultPaintOutline = new Paint(Paint.ANTI_ALIAS_FLAG);
 		wayDefaultPaintOutline.setStyle(Paint.Style.STROKE);
-		wayDefaultPaintOutline.setColor(getResources().getColor(android.R.color.holo_blue_dark));
+		wayDefaultPaintOutline.setColor(getResources().getColor(color));
 		wayDefaultPaintOutline.setAlpha(128);
 		wayDefaultPaintOutline.setStrokeWidth(7);
 		wayDefaultPaintOutline.setStrokeJoin(Paint.Join.ROUND);

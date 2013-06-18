@@ -10,7 +10,9 @@ public enum PreferenceKeys {
 	/** key to define the map */
 	MAP("map_list"),
 	/** key to define the track(s) */
-	TRACK("track_list");
+	TRACK("track_list"),
+	/** key to define the color of the track */
+	TRACK_COLOR("track_color");
 
 	private String key;
 
