@@ -6,6 +6,8 @@ import java.io.FilenameFilter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import de.ronnyfriedland.mytrackvisualizer.enums.PreferenceKeys;
 
@@ -17,60 +19,88 @@ import de.ronnyfriedland.mytrackvisualizer.enums.PreferenceKeys;
 @SuppressWarnings("deprecation")
 public class GpsTrackViewerSettingsActivity extends PreferenceActivity {
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
-	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.preferences);
-		findGpxFilesAndAddToPreferenceSelection();
-		findMapFilesAndAddToPreferenceSelection();
-	}
+    /**
+     * {@inheritDoc}
+     * 
+     * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences);
+        configureMapListPreference();
+        configureTrackListPreference();
+        configureTrackColorListPreference();
+    }
 
-	private void findGpxFilesAndAddToPreferenceSelection() {
-		File sdcard = Environment.getExternalStorageDirectory();
-		String[] gpxFiles = sdcard.list(new FilenameFilter() {
-			/**
-			 * {@inheritDoc}
-			 * 
-			 * @see java.io.FilenameFilter#accept(java.io.File,
-			 *      java.lang.String)
-			 */
-			@Override
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".gpx");
-			}
-		});
+    private void configureMapListPreference() {
+        File sdcard = Environment.getExternalStorageDirectory();
+        String[] mapFiles = sdcard.list(new FilenameFilter() {
+            /**
+             * {@inheritDoc}
+             * 
+             * @see java.io.FilenameFilter#accept(java.io.File,
+             *      java.lang.String)
+             */
+            @Override
+            public boolean accept(File dir, String filename) {
+                return filename.endsWith(".map");
+            }
+        });
 
-		ListPreference trackList = (ListPreference) findPreference(PreferenceKeys.TRACK.getKey());
-		trackList.setEntries(gpxFiles);
-		trackList.setEntryValues(gpxFiles);
-		trackList.setSummary(trackList.getEntry());
-		getPreferenceScreen().addPreference(trackList);
-	}
+        ListPreference mapList = (ListPreference) findPreference(PreferenceKeys.MAP.getKey());
+        mapList.setEntries(mapFiles);
+        mapList.setEntryValues(mapFiles);
+        mapList.setSummary(mapList.getEntry());
+        mapList.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference pref, Object val) {
+                pref.setSummary((String) val);
+                return true;
+            }
+        });
+        getPreferenceScreen().addPreference(mapList);
+    }
 
-	private void findMapFilesAndAddToPreferenceSelection() {
-		File sdcard = Environment.getExternalStorageDirectory();
-		String[] mapFiles = sdcard.list(new FilenameFilter() {
-			/**
-			 * {@inheritDoc}
-			 * 
-			 * @see java.io.FilenameFilter#accept(java.io.File,
-			 *      java.lang.String)
-			 */
-			@Override
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".map");
-			}
-		});
+    private void configureTrackListPreference() {
+        File sdcard = Environment.getExternalStorageDirectory();
+        String[] gpxFiles = sdcard.list(new FilenameFilter() {
+            /**
+             * {@inheritDoc}
+             * 
+             * @see java.io.FilenameFilter#accept(java.io.File,
+             *      java.lang.String)
+             */
+            @Override
+            public boolean accept(File dir, String filename) {
+                return filename.endsWith(".gpx");
+            }
+        });
 
-		ListPreference mapList = (ListPreference) findPreference(PreferenceKeys.MAP.getKey());
-		mapList.setEntries(mapFiles);
-		mapList.setEntryValues(mapFiles);
-		mapList.setSummary(mapList.getEntry());
-		getPreferenceScreen().addPreference(mapList);
-	}
+        ListPreference trackList = (ListPreference) findPreference(PreferenceKeys.TRACK.getKey());
+        trackList.setEntries(gpxFiles);
+        trackList.setEntryValues(gpxFiles);
+        trackList.setSummary(trackList.getEntry());
+        trackList.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference pref, Object val) {
+                pref.setSummary((String) val);
+                return true;
+            }
+        });
+        getPreferenceScreen().addPreference(trackList);
+    }
+
+    private void configureTrackColorListPreference() {
+        ListPreference trackColorList = (ListPreference) findPreference(PreferenceKeys.TRACK_COLOR.getKey());
+        trackColorList.setSummary(trackColorList.getEntry());
+        trackColorList.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference pref, Object val) {
+                ListPreference listPref = ((ListPreference) pref);
+                listPref.setSummary(listPref.getEntry());
+                return true;
+            }
+        });
+    }
 }

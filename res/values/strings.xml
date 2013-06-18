@@ -18,9 +18,9 @@
     <string name="trk_length">Länge</string>
 
     <string-array name="color_select_keys">
-        <item>red</item>
-        <item>green</item>
-        <item>blue</item>
+        <item>rot</item>
+        <item>grün</item>
+        <item>blau</item>
         <item>orange</item>
     </string-array>
 
