@@ -10,8 +10,9 @@ import android.preference.PreferenceActivity;
 import de.ronnyfriedland.mytrackvisualizer.enums.PreferenceKeys;
 
 /**
- * @author Ronny Friedland
+ * Activity to create the settings view.
  * 
+ * @author Ronny Friedland
  */
 @SuppressWarnings("deprecation")
 public class GpsTrackViewerSettingsActivity extends PreferenceActivity {

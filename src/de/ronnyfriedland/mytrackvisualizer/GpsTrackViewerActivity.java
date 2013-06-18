@@ -40,6 +40,11 @@ import android.widget.Toast;
 import de.ronnyfriedland.mytrackvisualizer.enums.PreferenceKeys;
 import de.ronnyfriedland.mytrackvisualizer.to.TrackMetadata;
 
+/**
+ * Main activity to start the app.
+ * 
+ * @author Ronny Friedland
+ */
 public class GpsTrackViewerActivity extends MapActivity {
 
 	private MapView mapView;
@@ -135,19 +140,19 @@ public class GpsTrackViewerActivity extends MapActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		loadContent();
 	}
 
 	private void loadContent() {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		loadMap(prefs);
-		loadTrack(prefs);
+		loadMap(prefs.getString(PreferenceKeys.MAP.getKey(), ""));
+		loadTrack(prefs.getString(PreferenceKeys.TRACK.getKey(), ""));
 	}
 
-	private void loadMap(SharedPreferences prefs) {
-		String mapFileName = prefs.getString(PreferenceKeys.MAP.getKey(), "");
-
+	/**
+	 * Loads the the map which is defined in the preferences.
+	 */
+	private void loadMap(final String mapFileName) {
 		File mapFile = new File(Environment.getExternalStorageDirectory(), mapFileName);
 		if (mapFile.exists() && mapFile.isFile()) {
 			mapView.setMapFile(mapFile);
@@ -159,9 +164,11 @@ public class GpsTrackViewerActivity extends MapActivity {
 		mapView.getController().setZoom(12);
 	}
 
-	private void loadTrack(SharedPreferences prefs) {
-		String gpxFileName = prefs.getString(PreferenceKeys.TRACK.getKey(), "");
-
+	/**
+	 * Loads the tracks which from the file which filename is defined in the
+	 * preferences and given as parameter. The tracks are displayed as overlay.
+	 */
+	private void loadTrack(final String gpxFileName) {
 		Paint wayDefaultPaintFill = new Paint(Paint.ANTI_ALIAS_FLAG);
 		wayDefaultPaintFill.setStyle(Paint.Style.STROKE);
 		wayDefaultPaintFill.setColor(getResources().getColor(android.R.color.holo_blue_dark));
