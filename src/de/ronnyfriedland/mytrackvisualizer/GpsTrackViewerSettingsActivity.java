@@ -98,7 +98,12 @@ public class GpsTrackViewerSettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference pref, Object val) {
                 ListPreference listPref = ((ListPreference) pref);
-                listPref.setSummary(listPref.getEntry());
+                CharSequence[] values = listPref.getEntryValues();
+                for (int i = 0; i < values.length; i++) {
+                    if (val == values[i]) {
+                        listPref.setSummary(listPref.getEntries()[i]);
+                    }
+                }
                 return true;
             }
         });
