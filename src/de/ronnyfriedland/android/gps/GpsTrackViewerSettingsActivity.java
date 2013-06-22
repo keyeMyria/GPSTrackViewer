@@ -1,4 +1,4 @@
-package de.ronnyfriedland.mytrackvisualizer;
+package de.ronnyfriedland.android.gps;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -9,7 +9,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
-import de.ronnyfriedland.mytrackvisualizer.enums.PreferenceKeys;
+import de.ronnyfriedland.android.gps.enums.PreferenceKeys;
 
 /**
  * Activity to create the settings view.

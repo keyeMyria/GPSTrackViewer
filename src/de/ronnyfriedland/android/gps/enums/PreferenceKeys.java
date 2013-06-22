@@ -1,4 +1,4 @@
-package de.ronnyfriedland.mytrackvisualizer.enums;
+package de.ronnyfriedland.android.gps.enums;
 
 /**
  * Available keys for the preferences.

@@ -1,4 +1,4 @@
-package de.ronnyfriedland.mytrackvisualizer;
+package de.ronnyfriedland.android.gps;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -36,8 +36,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import de.ronnyfriedland.mytrackvisualizer.enums.PreferenceKeys;
-import de.ronnyfriedland.mytrackvisualizer.to.TrackMetadata;
+import de.ronnyfriedland.android.gps.enums.PreferenceKeys;
+import de.ronnyfriedland.android.gps.to.TrackMetadata;
 
 /**
  * Main activity to start the app.

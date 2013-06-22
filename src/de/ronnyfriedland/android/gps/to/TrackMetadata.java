@@ -1,4 +1,4 @@
-package de.ronnyfriedland.mytrackvisualizer.to;
+package de.ronnyfriedland.android.gps.to;
 
 import java.util.Date;
 
