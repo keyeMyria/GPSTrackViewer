@@ -19,6 +19,9 @@ import de.ronnyfriedland.android.gps.enums.PreferenceKeys;
 @SuppressWarnings("deprecation")
 public class GpsTrackViewerSettingsActivity extends PreferenceActivity {
 
+    public static final File DATA_DIR = new File(Environment.getExternalStorageDirectory(),
+            "Android/data/org.mapsforge.android.maps");
+
     /**
      * {@inheritDoc}
      * 
@@ -34,7 +37,7 @@ public class GpsTrackViewerSettingsActivity extends PreferenceActivity {
     }
 
     private void configureMapListPreference() {
-        File sdcard = Environment.getExternalStorageDirectory();
+        File sdcard = DATA_DIR;
         String[] mapFiles = sdcard.list(new FilenameFilter() {
             /**
              * {@inheritDoc}
@@ -63,7 +66,7 @@ public class GpsTrackViewerSettingsActivity extends PreferenceActivity {
     }
 
     private void configureTrackListPreference() {
-        File sdcard = Environment.getExternalStorageDirectory();
+        File sdcard = DATA_DIR;
         String[] gpxFiles = sdcard.list(new FilenameFilter() {
             /**
              * {@inheritDoc}
