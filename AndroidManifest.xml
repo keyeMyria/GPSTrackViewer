@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.ronnyfriedland.android.gps"
+    package="de.ronnyfriedland.mytrackvisualizer"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,6 +9,7 @@
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />  
 
     <application
         android:allowBackup="true"
@@ -24,8 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.ronnyfriedland.android.gps.GpsTrackViewerSettingsActivity"
-            android:label="@string/settings_name" >
+            android:name="de.ronde.ronnyfriedland.android.gps.GpsTrackViewerSettingsActivity         android:label="@string/settings_name" >
         </activity>
     </application>
 
