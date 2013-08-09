@@ -9,8 +9,8 @@
     <string name="action_settings">Konfiguration</string>
     <string name="action_exit">Beenden</string>
     <!-- Messages -->
-    <string name="msg_no_map">Keine Karte gefunden</string>
-    <string name="msg_track">Track: %1$s\nGesamtlänge: %2$.2f km</string>
+    <string name="msg_no_map">Keine Karte geladen</string>
+    <string name="msg_track">Gesamtlänge: %2$.2f km</string>
     <!-- Dialog for Tracks -->
     <string name="trk_title">Details</string>
     <string name="trk_name">Name</string>
