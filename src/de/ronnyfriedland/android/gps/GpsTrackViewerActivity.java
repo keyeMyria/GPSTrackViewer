@@ -152,6 +152,11 @@ public class GpsTrackViewerActivity extends MapActivity {
         loadContent();
     }
 
+    /**
+     * {@inheritDoc}
+     * 
+     * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -161,6 +166,11 @@ public class GpsTrackViewerActivity extends MapActivity {
         outState.putDouble(MapStateKeys.LONGITUDE.getKey(), mapPos.getMapCenter().getLongitude());
     }
 
+    /**
+     * {@inheritDoc}
+     * 
+     * @see android.app.Activity#onRestoreInstanceState(android.os.Bundle)
+     */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
